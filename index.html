@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROTOCOLO VERDUGO // ACCESO RESTRINGIDO</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="scanline"></div>
+    <div class="noise"></div>
+
+    <section id="view-login" class="screen active">
+        <div class="login-box">
+            <h1 class="glitch" data-text="DULCE VERDUGO">DULCE VERDUGO</h1>
+            <div class="system-status">
+                <p>> SERVIDOR: ENCRIPTADO</p>
+                <p>> CONEXIÓN: SEGURA</p>
+            </div>
+            <input type="text" id="agent-name" placeholder="INTRODUCE TU ALIAS" autocomplete="off">
+            <button class="btn-main" onclick="app.login()">INICIAR SISTEMA</button>
+        </div>
+    </section>
+
+    <section id="view-dashboard" class="screen hidden">
+        <header>
+            <div class="header-left">
+                AGENTE: <span id="display-agent" class="text-neon"></span>
+            </div>
+            <div class="header-right">
+                NIVEL: <span id="agent-rank">INICIADO</span>
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div class="bar-bg"><div class="bar-fill" id="progress-fill"></div></div>
+            <p class="text-xs">ARCHIVOS DESENCRIPTADOS: <span id="completed-count">0</span>/15</p>
+        </div>
+
+        <div class="missions-grid" id="missions-list">
+            </div>
+    </section>
+
+    <section id="view-terminal" class="screen hidden">
+        <div class="terminal-window">
+            <div class="window-bar">
+                <button onclick="app.showDashboard()" class="btn-back">◄ VOLVER AL INDEX</button>
+                <span id="terminal-id">MSN-00</span>
+            </div>
+            
+            <div class="console-output">
+                <p>> INICIANDO PROTOCOLO DE FUERZA BRUTA...</p>
+                <p>> OBJETIVO: <span id="mission-target" class="text-danger"></span></p>
+                <br>
+                <p class="hint-label">>> PISTA DE ACCESO:</p>
+                <p id="mission-hint" class="hint-text"></p>
+                <br>
+                <p class="blink">_ESPERANDO INPUT...</p>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="mission-password" placeholder="ESCRIBE LA CLAVE..." autocomplete="off">
+                <button class="btn-hack" onclick="app.checkCode()">DESENCRIPTAR</button>
+            </div>
+            <div id="error-msg" class="hidden error-text">ACCESO DENEGADO</div>
+        </div>
+    </section>
+
+    <section id="view-file" class="screen hidden">
+        <div class="file-window">
+            <div class="window-bar">
+                <button onclick="app.showDashboard()" class="btn-back">◄ VOLVER AL INDEX</button>
+                <span class="file-tag">TOP SECRET // NO EYES ONLY</span>
+            </div>
+            
+            <div class="file-content" id="file-display"></div>
+            
+            <div class="file-footer">
+                <button onclick="app.showDashboard()" class="btn-main">CERRAR ARCHIVO</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

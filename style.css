@@ -1,0 +1,129 @@
+:root {
+    --bg: #0a0a0a;
+    --neon: #00ff41;
+    --dim: #004411;
+    --danger: #ff0055;
+    --white: #e0e0e0;
+    --font-hacker: 'Share Tech Mono', monospace;
+    --font-note: 'Special Elite', cursive;
+}
+
+body {
+    background: var(--bg);
+    color: var(--neon);
+    font-family: var(--font-hacker);
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Efectos de Pantalla */
+.scanline {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none; z-index: 99;
+}
+
+/* Tipografía y Utilidades */
+.glitch { font-size: 2.5rem; text-shadow: 2px 0 var(--danger); animation: shake 2s infinite; }
+@keyframes shake { 0% { transform: translate(0,0); } 5% { transform: translate(2px,0); } 100% { transform: translate(0,0); } }
+.text-neon { color: var(--neon); }
+.text-danger { color: var(--danger); }
+.blink { animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hidden { display: none !important; }
+.active { display: flex !important; }
+
+/* Estructura de Vistas */
+.screen {
+    width: 100%; height: 100%; padding: 20px; box-sizing: border-box;
+    display: flex; flex-direction: column; max-width: 600px; margin: 0 auto;
+}
+
+/* Login */
+.login-box { margin: auto; text-align: center; width: 100%; }
+input { background: #000; border: 1px solid var(--neon); color: var(--neon); padding: 15px; width: 100%; box-sizing: border-box; font-family: var(--font-hacker); font-size: 1.2rem; margin: 20px 0; outline: none; text-transform: uppercase; }
+button { background: var(--neon); color: #000; border: none; padding: 15px; width: 100%; font-family: var(--font-hacker); font-weight: bold; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; }
+button:active { background: #fff; }
+
+/* Dashboard */
+header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--dim); padding-bottom: 10px; margin-bottom: 20px; }
+.progress-container { margin-bottom: 20px; }
+.bar-bg { background: #111; height: 10px; width: 100%; border: 1px solid var(--dim); }
+.bar-fill { background: var(--neon); height: 100%; width: 0%; transition: width 0.5s; }
+
+.missions-grid {
+    flex: 1; overflow-y: auto; display: grid; gap: 10px;
+    padding-right: 5px; scrollbar-width: thin; scrollbar-color: var(--neon) #000;
+}
+.mission-card {
+    background: rgba(0, 30, 0, 0.5); border: 1px solid var(--dim); padding: 15px;
+    display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+}
+.mission-card.unlocked { border-left: 5px solid var(--neon); background: rgba(0, 255, 65, 0.1); }
+.mission-card.locked { border-left: 5px solid var(--danger); opacity: 0.6; }
+
+/* Terminal & Visor de Archivos */
+.terminal-window, .file-window {
+    flex: 1; display: flex; flex-direction: column; background: #000;
+    border: 1px solid var(--dim); box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+}
+.window-bar {
+    background: var(--dim); padding: 10px; display: flex; justify-content: space-between; align-items: center;
+}
+.btn-back { width: auto; padding: 5px 15px; font-size: 0.9rem; border: 1px solid var(--neon); background: #000; color: var(--neon); }
+.console-output, .file-content {
+    flex: 1; padding: 20px; overflow-y: auto; line-height: 1.6;
+}
+
+/* ESTILOS DE LOS ARCHIVOS (RECOMPENSAS) */
+.file-content h2 { border-bottom: 1px dashed var(--neon); padding-bottom: 10px; color: var(--white); }
+
+.evidence-img { 
+    width: 100%; 
+    height: auto; 
+    border: 2px solid var(--neon); 
+    margin: 15px 0; 
+    opacity: 0.9; 
+    display: block;
+}
+.chat-container { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.chat-bubble { padding: 10px; border-radius: 5px; max-width: 80%; font-size: 0.9rem; }
+.chat-left { align-self: flex-start; background: #222; color: #fff; border-left: 3px solid var(--danger); }
+.chat-right { align-self: flex-end; background: #003300; color: var(--neon); border-right: 3px solid var(--neon); text-align: right; }
+.doc-paper { 
+    background: #e0e0e0; color: #000; padding: 20px; 
+    font-family: var(--font-note); transform: rotate(-1deg);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.5); margin: 20px 0;
+}
+.red-stamp { 
+    color: red; border: 3px solid red; display: inline-block; 
+    padding: 5px 10px; font-weight: bold; transform: rotate(-10deg); font-family: sans-serif;
+    margin-bottom: 15px;
+}
+
+/* --- SEGURIDAD UI --- */
+
+/* 1. Deshabilitar selección de texto en toda la app */
+body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE10+/Edge */
+    user-select: none;         /* Standard */
+}
+
+/* 2. Permitir seleccionar SOLO en los inputs (para que puedan escribir la clave) */
+input {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* 3. Deshabilitar arrastrar imágenes (evita que las guarden arrastrando) */
+img {
+    pointer-events: none;       /* No se les puede hacer clic */
+    -webkit-user-drag: none;    /* No se pueden arrastrar */
+    user-drag: none;
+}
