@@ -13,8 +13,12 @@ body {
     color: var(--neon);
     font-family: var(--font-hacker);
     margin: 0;
-    height: 100vh;
+    width: 100%;
+    /* AQUÍ ESTÁ EL TRUCO: */
+    height: 100vh; /* Fallback para navegadores viejos */
+    height: 100dvh; /* Altura dinámica real (descuenta la barra de navegación) */
     overflow: hidden;
+    position: fixed; /* Evita que la página "baile" al hacer scroll */
 }
 
 /* Efectos de Pantalla */
@@ -37,8 +41,18 @@ body {
 
 /* Estructura de Vistas */
 .screen {
-    width: 100%; height: 100%; padding: 20px; box-sizing: border-box;
-    display: flex; flex-direction: column; max-width: 600px; margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+    /* ESTO ES VITAL: Añade espacio extra abajo para proteger el contenido */
+    padding-bottom: 80px; 
+    /* Protección extra para iPhone X/11/12/etc (la barra negra de abajo) */
+    padding-bottom: calc(20px + env(safe-area-inset-bottom)); 
 }
 
 /* Login */
@@ -126,4 +140,46 @@ img {
     pointer-events: none;       /* No se les puede hacer clic */
     -webkit-user-drag: none;    /* No se pueden arrastrar */
     user-drag: none;
+}
+
+
+/* --- ESTILO BOTÓN SALIR (MINIMALISTA/DELICADO) --- */
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px; /* Reducimos margen */
+    align-items: baseline; /* Alinea el texto por la base */
+}
+
+header {
+    flex-direction: column;
+    align-items: flex-end;
+    padding-bottom: 5px; /* Hacemos el header más compacto */
+}
+
+.btn-logout {
+    background: transparent;
+    border: none; /* Quitamos el borde grueso */
+    color: var(--danger); /* Mantenemos el rojo de alerta */
+    padding: 2px 0; /* Casi sin relleno */
+    font-size: 0.75rem; /* Letra mucho más pequeña y fina */
+    margin-top: 0;
+    width: auto;
+    align-self: flex-end;
+    text-align: right;
+    letter-spacing: 1px;
+    font-family: var(--font-hacker);
+    opacity: 0.7; /* Un poco transparente para que sea sutil */
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background: transparent; /* Sin fondo al pasar el mouse */
+    color: #fff; /* Texto blanco */
+    opacity: 1;
+    text-shadow: 0 0 8px var(--danger); /* Solo un brillo sutil rojo en el texto */
+    box-shadow: none; /* Quitamos la caja de brillo anterior */
+    text-decoration: underline; /* Un subrayado sutil al pasar el mouse */
 }
