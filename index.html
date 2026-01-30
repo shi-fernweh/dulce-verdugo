@@ -26,12 +26,13 @@
 
     <section id="view-dashboard" class="screen hidden">
         <header>
-            <div class="header-left">
-                AGENTE: <span id="display-agent" class="text-neon"></span>
+            <div class="header-info">
+                <div>AGENTE: <span id="display-agent" class="text-neon"></span></div>
+                <div class="header-right">
+                    <span>NIVEL: <span id="agent-rank">INICIADO</span></span>
+                </div>
             </div>
-            <div class="header-right">
-                NIVEL: <span id="agent-rank">INICIADO</span>
-            </div>
+            <button onclick="app.logout()" class="btn-logout">> DESCONECTAR</button>
         </header>
 
         <div class="progress-container">
